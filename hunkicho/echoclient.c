@@ -20,12 +20,7 @@ int main(int argc, char **argv)
     Rio_readinitb(&rio, clientfd);
 
     while(Fgets(buf, MAXLINE, stdin) != NULL)
-    {
-        for(int i=0; i < sizeof(buf) / sizeof(char); i++)
-        {
-            printf("%c",i);
-        }
-        
+    {   
         //buf에서 clientfd로 strlen(buf)바이트로 전송
         Rio_writen(clientfd, buf, strlen(buf));
         // 다음 텍스트 줄을 rio에서 읽고 이것을 buf로 복사하고 텍스트라인을 null로 종료시킨다
