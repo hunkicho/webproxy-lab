@@ -8,7 +8,7 @@ CC = gcc
 CFLAGS = -g -Wall
 LDFLAGS = -lpthread
 
-all: echoclient
+all: echoclient echoserveri
 
 # csapp.o: csapp.c csapp.h
 # 	$(CC) $(CFLAGS) -c csapp.c
@@ -19,20 +19,23 @@ all: echoclient
 # proxy: proxy.o csapp.o
 # 	$(CC) $(CFLAGS) proxy.o csapp.o -o proxy $(LDFLAGS)
 
+#client
 echoclient.o: echoclient.c csapp.h
 	$(CC) $(CFLAGS) -c echoclient.c
-
+ 
 echoclient: echoclient.o csapp.o
 	$(CC) $(CFLAGS) echoclient.o csapp.o -o echoclient $(LDFLAGS)
 
+# echo.c
 # echo.o: echo.c
 # 	$(CC) $(CFLAGS) -c echo.c
 
-# echoserveri.o: echoserveri.c csapp.h
-# 	$(CC) $(CFLAGS) -c echoserveri.c
+#echo server
+echoserveri.o: echoserveri.c csapp.h
+	$(CC) $(CFLAGS) -c echoserveri.c
 
-# echoserveri: echoserveri.o csapp.o echo.o
-# 	$(CC) $(CFLAGS) echoserveri.o csapp.o echo.o -o echoserveri $(LDFLAGS)
+echoserveri: echoserveri.o csapp.o echo.o
+	$(CC) $(CFLAGS) echoserveri.o csapp.o echo.o -o echoserveri $(LDFLAGS)
 
 # Creates a tarball in ../proxylab-handin.tar that you can then
 # hand in. DO NOT MODIFY THIS!
@@ -41,10 +44,10 @@ handin:
 
 # clean:
 # 	rm -f *~ *.o proxy core *.tar *.zip *.gzip *.bzip *.gz
-clean:
-	rm -f *~ *.o echoclient core *.tar *.zip *.gzip *.bzip *.gz
+# clean:
+# 	rm -f *~ *.o echoclient core *.tar *.zip *.gzip *.bzip *.gz
 # clean:
 # 	rm -f *~ *.o echoserveri core *.tar *.zip *.gzip *.bzip *.gz
-# clean:
-# 	rm -f *~ *.o echo core *.tar *.zip *.gzip *.bzip *.gz
+clean:
+	rm -f *~ *.o echoserveri echoclient core *.tar *.zip *.gzip *.bzip *.gz
 
