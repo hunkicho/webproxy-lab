@@ -138,7 +138,6 @@ void serve_static(int fd, char *filename, int filesize)
 {
   int srcfd;
   char *srcp, filetype[MAXLINE],  buf[MAXBUF];
-  sprintf(buf,"!!!!!!!!!!!!##################\n");
   /* Send response headers to client */
   get_filetype(filename, filetype);
   sprintf(buf, "HTTP/1.0 200 OK\r\n");
