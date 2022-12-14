@@ -290,16 +290,13 @@ void doit(int fd) // fd = file desciptor
   Rio_readlineb(&rio, buf, MAXLINE); // 요청라인을 읽고 분석
   printf("Request headers:\n");
   printf("%s", buf);
-  printf("what is sscanf??\n");
   sscanf(buf, "%s %s %s", method, uri, version);
-  printf("what is sscanf finish??\n");
-  printf("what is method?? %s\n",method);
   if(strcasecmp(method, "GET") && strcasecmp(method, "HEAD"))
   {
     clienterror(fd, method, "501", "Not implemented", "Tiny does not implement this method");
     return;
   }
-  printf("passpasspass\n");
+
   //read_requesthdrs(&rio);  //post면 무시??
 
 
@@ -315,7 +312,6 @@ void doit(int fd) // fd = file desciptor
   /* Serve static content */
   if(is_static)
   {
-    printf("static YNYNYNYNYBYN??\n");
     if(!(S_ISREG(sbuf.st_mode)) || !(S_IRUSR & sbuf.st_mode))  //보통 파일이 아니면서 GET 권한을 가지고 있지 않는
     {
       clienterror(fd, filename, "403", "Forbidden", "Tiny couldn't read the file");
@@ -458,6 +454,10 @@ void get_filetype(char *filename, char *filetype)
   else if(strstr(filename, ".mpg"))
   {
     strcpy(filetype, "image/mpg");
+  }
+  else if(strstr(filename, ".mp4"))
+  {
+    strcpy(filetype, "video/mp4");
   }
   else
   {

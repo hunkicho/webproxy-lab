@@ -15,18 +15,23 @@ void goOrigin(int fd)
   int clientfd;
   char *host, *port, buf[MAXLINE], secondbuf[MAXLINE];
 
-  host = "localhost";
-  port = "8888";
+w
   rio_t rio;
   rio_t test;
   int qq;
 
-  clientfd = Open_clientfd(host, port);
   
-  // 진짜 서버에 보내기
+  
+  
   Rio_readinitb(&rio, fd);
   Rio_readlineb(&rio, buf, MAXLINE);
+
+  // 진짜 서버에 보내기
+  clientfd = Open_clientfd(host, port);
   Rio_writen(clientfd, buf, strlen(buf));
+
+
+
 
   //서버에서 보낸거 클라이언트에 주기
   Rio_readinitb(&test, clientfd);
